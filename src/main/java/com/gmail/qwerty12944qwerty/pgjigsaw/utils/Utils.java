@@ -77,7 +77,7 @@ public class Utils {
     public static int boardIndex(Location block) {
         int index = 0;
 
-        for (Location l : Main.PLAYER_BOARD.get(getBoardIndex(block))) {
+        for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {
             if (block.getBlockX() == l.getBlockX() &&
                     block.getBlockY() == l.getBlockY() &&
                     block.getBlockZ() == l.getBlockZ()) {
