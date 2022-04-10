@@ -1,7 +1,7 @@
-package com.blackoutburst.pgjigsaw.core;
+package com.gmail.qwerty12944qwerty.pgjigsaw.core;
 
-import com.blackoutburst.pgjigsaw.main.Main;
-import com.blackoutburst.pgjigsaw.utils.Utils;
+import com.gmail.qwerty12944qwerty.pgjigsaw.main.Main;
+import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
@@ -20,6 +20,7 @@ public class Core {
     public static Instant gameEnd;
 
     public static int currentScore = 0;
+    public static int playersDone = 0;
 
     public static Material[] order;
 
@@ -42,6 +43,7 @@ public class Core {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Utils.giveItems(player);
                 }
+                Main.maxScore = Bukkit.getOnlinePlayers().size();
             }
         }.runTaskLater(Main.getPlugin(Main.class), 60L);
     }

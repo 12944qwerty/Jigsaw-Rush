@@ -1,7 +1,7 @@
-package com.blackoutburst.pgjigsaw.utils;
+package com.gmail.qwerty12944qwerty.pgjigsaw.utils;
 
-import com.blackoutburst.pgjigsaw.core.Core;
-import com.blackoutburst.pgjigsaw.main.Main;
+import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
+import com.gmail.qwerty12944qwerty.pgjigsaw.main.Main;
 import nms.NMSTitle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -50,15 +50,34 @@ public class Utils {
         for (Location l : Main.BOARD) {
             Main.world.getBlockAt(l).setType(Material.WOOL);
         }
-        for (Location l : Main.PLAYER_BOARD) {
-            Main.world.getBlockAt(l).setType(Material.SNOW_BLOCK);
+        for (ArrayList<Location> board : Main.PLAYER_BOARDS) {
+            for (Location l : board) {
+                Main.world.getBlockAt(l).setType(Material.SNOW_BLOCK);
+            }
         }
+    }
+
+    public static int getBoardIndex(Location block) {
+        int index = 0;
+
+        for (ArrayList<Location> i: Main.PLAYER_BOARDS) {
+            for (Location l : i) {
+                if (block.getBlockX() == l.getBlockX() &&
+                        block.getBlockY() == l.getBlockY() &&
+                        block.getBlockZ() == l.getBlockZ()) {
+                    return index;
+                }
+            }
+            index++;
+        }
+
+        return -1;
     }
 
     public static int boardIndex(Location block) {
         int index = 0;
 
-        for (Location l : Main.PLAYER_BOARD) {
+        for (Location l : Main.PLAYER_BOARD.get(getBoardIndex(block))) {
             if (block.getBlockX() == l.getBlockX() &&
                     block.getBlockY() == l.getBlockY() &&
                     block.getBlockZ() == l.getBlockZ()) {
@@ -70,9 +89,9 @@ public class Utils {
         return (index);
     }
 
-    public static boolean correctBoard() {
+    public static boolean correctBoard(Location block) {
         int i = 0;
-        for (Location l : Main.PLAYER_BOARD) {
+        for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {
             if (!Main.world.getBlockAt(l).getType().equals(Core.order[i++])) {
                 return (false);
             }
@@ -83,11 +102,13 @@ public class Utils {
     public static boolean isFromPlayerBoard(Location block) {
         boolean fromBoard = false;
 
-        for (Location l : Main.PLAYER_BOARD) {
-            if (block.getBlockX() == l.getBlockX() &&
-                block.getBlockY() == l.getBlockY() &&
-                block.getBlockZ() == l.getBlockZ()) {
-                fromBoard = true;
+        for (ArrayList<Location> board : Main.PLAYER_BOARDS) {
+            for (Location l : board) {
+                if (block.getBlockX() == l.getBlockX() &&
+                    block.getBlockY() == l.getBlockY() &&
+                    block.getBlockZ() == l.getBlockZ()) {
+                    fromBoard = true;
+                }
             }
         }
 

@@ -1,10 +1,10 @@
-package com.blackoutburst.pgjigsaw.main;
+package com.gmail.qwerty12944qwerty.pgjigsaw.main;
 
-import com.blackoutburst.pgjigsaw.commands.CommandEnd;
-import com.blackoutburst.pgjigsaw.commands.CommandMaxScore;
-import com.blackoutburst.pgjigsaw.commands.CommandStart;
-import com.blackoutburst.pgjigsaw.core.Core;
-import com.blackoutburst.pgjigsaw.utils.Utils;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandEnd;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandMaxScore;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandStart;
+import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
+import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -38,11 +38,11 @@ public class Main  extends JavaPlugin implements Listener {
     public static Location gameSpawn;
 
     public static final List<Location> BOARD = new ArrayList<>();
-    public static final List<Location> PLAYER_BOARD = new ArrayList<>();
+    public static final List<List<<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
 
     public static final Material[] MATERIALS = new Material[] {Material.DIRT, Material.STONE, Material.COBBLESTONE, Material.LOG, Material.WOOD, Material.BRICK, Material.GOLD_BLOCK, Material.NETHERRACK, Material.ENDER_STONE};
 
-    public static  World world;
+    public static World world;
 
     @Override
     public void onEnable() {
@@ -63,12 +63,18 @@ public class Main  extends JavaPlugin implements Listener {
         }
 
         file = YamlConfiguration.loadConfiguration(getClass().getResourceAsStream("/player_board.yml"));
-        respawns = file.getConfigurationSection("loc").getKeys(false);
-        for (final String i : respawns) {
-            final double x = file.getDouble("loc."+i+".x");
-            final double y = file.getDouble("loc."+i+".y");
-            final double z = file.getDouble("loc."+i+".z");
-            PLAYER_BOARD.add(new Location(world, x, y, z));
+        respawns = file.getKeys(false);
+        for (final String place : respawns) {
+            Set<String> jigsaw = file.getConfigurationSection(place).getKeys(false);
+            PLAYER_BOARDS.add(new ArrayList<Location>());
+            String mystr = place.replaceAll("[^\\d]", "");
+            int number = Integer.parseInt(mystr);
+            for (final String i : jigsaw) {
+                final double x = file.getDouble(place+"."+i+".x");
+                final double y = file.getDouble(place+"."+i+".y");
+                final double z = file.getDouble(place+"."+i+".z");
+                PLAYER_BOARDS.get(number).add(new Location(world, x, y, z));
+            }
         }
     }
 
@@ -83,12 +89,13 @@ public class Main  extends JavaPlugin implements Listener {
                 clickedBlock.setType(event.getPlayer().getItemInHand().getType());
             if (clickedBlock.getType().equals(Core.order[Utils.boardIndex(clickedBlock.getLocation())])) {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ORB_PICKUP, 1, 1);
-                if (Utils.correctBoard()) {
+                if (Utils.correctBoard(clickedBlock.getLocation())) {
                     Core.boardEnd = Instant.now();
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
                     event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Core.boardEnd).toMillis() / 1000.0f))+"s");
                     Core.currentScore++;
-                    if (Core.currentScore >= maxScore) {
+                    Core.playersDone++;
+                    if (Core.currentScore >= maxScore && Core.playersDone >= maxScore) {
                         Core.end();
                     } else {
                         Utils.cleanBoard();

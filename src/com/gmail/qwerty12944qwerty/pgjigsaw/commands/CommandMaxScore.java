@@ -1,6 +1,6 @@
-package com.blackoutburst.pgjigsaw.commands;
+package com.gmail.qwerty12944qwerty.pgjigsaw.commands;
 
-import com.blackoutburst.pgjigsaw.main.Main;
+import com.gmail.qwerty12944qwerty.pgjigsaw.main.Main;
 import org.bukkit.command.CommandSender;
 
 public class CommandMaxScore {

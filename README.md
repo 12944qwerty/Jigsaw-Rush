@@ -1,11 +1,11 @@
 ![a](https://user-images.githubusercontent.com/30992311/156935574-6aab8589-34ac-4f7c-8cba-98dec9b333b7.png)
 
-[![License](https://img.shields.io/github/license/Blackoutburst/Jigsaw-Rush.svg)](LICENSE)
-[![Release](https://img.shields.io/github/release/Blackoutburst/Jigsaw-Rush.svg)](https://github.com/Blackoutburst/Jigsaw-Rush/releases)
+[![License](https://img.shields.io/github/license/12944qwerty/Jigsaw-Rush.svg)](LICENSE)
+[![Release](https://img.shields.io/github/release/12944qwerty/Jigsaw-Rush.svg)](https://github.com/12944qwerty/Jigsaw-Rush/releases)
 
 # Jigsaw-Rush
 
-This is a Minecraft 1.8 plugin who recreate the minigame Jigsaw Rush from Hypixel Party game for practice purpose
+This is a Minecraft 1.8 plugin who recreate the minigame Jigsaw Rush from Hypixel Party game for practice purpose.
 
 ## How to use
 For that you need the party game world and a spigot/paper 1.8 server
