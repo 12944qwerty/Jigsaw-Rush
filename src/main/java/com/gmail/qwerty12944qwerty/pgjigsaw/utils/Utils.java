@@ -138,4 +138,7 @@ public class Utils {
         }.runTaskLater(Main.getPlugin(Main.class), 40L);
     }
 
+	public static int randInt(int low, int high){
+      return (int)(Math.random()*high)+low;
+    }
 }

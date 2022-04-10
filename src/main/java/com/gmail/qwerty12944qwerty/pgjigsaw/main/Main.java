@@ -34,8 +34,8 @@ public class Main  extends JavaPlugin implements Listener {
 
     public static boolean gameRunning = false;
 
-    public static Location spawn;
-    public static Location gameSpawn;
+    public static List<Location> spawns = new ArrayList<>();
+    public static Location worldSpawn;
 
     public static final List<Location> BOARD = new ArrayList<>();
     public static final ArrayList<ArrayList<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
@@ -50,8 +50,7 @@ public class Main  extends JavaPlugin implements Listener {
 
         world = Bukkit.getWorlds().get(0);
 
-        spawn = new Location(world, 263.5f, 2, 1816.5f, 90, 0);
-        gameSpawn = new Location(world, 250.5f, 2, 1823.5f, 0, 0);
+        worldSpawn = new Location(world, 263.5f, 2, 1816, 0, 0);
 
         YamlConfiguration file = YamlConfiguration.loadConfiguration(getClass().getResourceAsStream("/board.yml"));
         Set<String> respawns = file.getConfigurationSection("loc").getKeys(false);
@@ -73,6 +72,10 @@ public class Main  extends JavaPlugin implements Listener {
                 final double x = file.getDouble(place+"."+i+".x");
                 final double y = file.getDouble(place+"."+i+".y");
                 final double z = file.getDouble(place+"."+i+".z");
+                if (i == "spawn") {
+                    spawns.add(new Location(world, x, y, z, file.getDouble(place+"."+i+".yaw")));
+                    continue;
+                }
                 PLAYER_BOARDS.get(number).add(new Location(world, x, y, z));
             }
         }
@@ -94,8 +97,8 @@ public class Main  extends JavaPlugin implements Listener {
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
                     event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Core.boardEnd).toMillis() / 1000.0f))+"s");
                     Core.currentScore++;
-                    Core.playersDone++;
-                    if (Core.currentScore >= maxScore && Core.playersDone >= maxScore) {
+                    Core.playersDone.add(event.getPlayer());
+                    if (Core.currentScore >= maxScore && Core.playersDone.equals(Core.playersPlaying) {
                         Core.end();
                     } else {
                         Utils.cleanBoard();
@@ -109,7 +112,17 @@ public class Main  extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().teleport(spawn);
+        event.getPlayer().teleport(worldSpawn);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Core.playersPlaying.remove(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerKick(PlayerKickEvent event) {
+        Core.playersPlaying.remove(event.getPlayer());
     }
 
     @EventHandler

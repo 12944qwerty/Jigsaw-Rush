@@ -20,16 +20,21 @@ public class Core {
     public static Instant gameEnd;
 
     public static int currentScore = 0;
-    public static int playersDone = 0;
+    public static List<Player> playersDone = new ArrayList<>();
+    public static List<Player> playersPlaying = new ArrayList<>();
 
     public static Material[] order;
 
     public static void start() {
         Main.gameRunning = true;
+        List<Location> spawnsc = new ArrayList<Location>(Main.spawns); // Copy
+        playersPlaying.clear();
+        playersPlaying.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.teleport(Main.gameSpawn);
+            player.teleport(spawnsc.remove(Util.random(0, spawnsc.size())));
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
+            playersPlaying.add(player);
         }
         Main.world.setDifficulty(Difficulty.PEACEFUL);
         Utils.cleanBoard();
@@ -54,9 +59,9 @@ public class Core {
         Utils.cleanBoard();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage("§aYou completed "+currentScore+" board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.gameBegin, Core.gameEnd).toMillis() / 1000.0f))+"s");
+            p.sendMessage("§aGame completed "+currentScore+" board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.gameBegin, Core.gameEnd).toMillis() / 1000.0f))+"s");
             p.getInventory().clear();
-            p.teleport(Main.spawn);
+            p.teleport(Main.worldSpawn);
         }
     }
 }
