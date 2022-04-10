@@ -38,7 +38,7 @@ public class Main  extends JavaPlugin implements Listener {
     public static Location gameSpawn;
 
     public static final List<Location> BOARD = new ArrayList<>();
-    public static final List<List<<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
+    public static final ArrayList<ArrayList<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
 
     public static final Material[] MATERIALS = new Material[] {Material.DIRT, Material.STONE, Material.COBBLESTONE, Material.LOG, Material.WOOD, Material.BRICK, Material.GOLD_BLOCK, Material.NETHERRACK, Material.ENDER_STONE};
 
