@@ -76,7 +76,9 @@ public class Utils {
 
     public static int boardIndex(Location block) {
         int index = 0;
-
+        if (getBoardIndex(block) == -1) {
+            return (false);
+        }
         for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {
             if (block.getBlockX() == l.getBlockX() &&
                     block.getBlockY() == l.getBlockY() &&
@@ -91,6 +93,9 @@ public class Utils {
 
     public static boolean correctBoard(Location block) {
         int i = 0;
+        if (getBoardIndex(block) == -1) {
+            return (false);
+        }
         for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {
             if (!Main.world.getBlockAt(l).getType().equals(Core.order[i++])) {
                 return (false);

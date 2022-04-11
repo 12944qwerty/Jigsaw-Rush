@@ -87,6 +87,7 @@ public class Main  extends JavaPlugin implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getClickedBlock() == null) return;
         if (event.getPlayer().getItemInHand() == null) return;
+        if (Core.playersDone.contains(event.getPlayer())) return;
         final Block clickedBlock = event.getClickedBlock();
 
         if (Utils.isFromPlayerBoard(clickedBlock.getLocation()) && !event.getPlayer().getItemInHand().getType().equals(clickedBlock.getType())) {
@@ -95,12 +96,12 @@ public class Main  extends JavaPlugin implements Listener {
             if (clickedBlock.getType().equals(Core.order[Utils.boardIndex(clickedBlock.getLocation())])) {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ORB_PICKUP, 1, 1);
                 if (Utils.correctBoard(clickedBlock.getLocation())) {
-                    Core.boardEnd = Instant.now();
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
                     event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Core.boardEnd).toMillis() / 1000.0f))+"s");
                     Core.currentScore++;
                     Core.playersDone.add(event.getPlayer());
                     if (Core.currentScore >= maxScore && Core.playersDone.equals(Core.playersPlaying) {
+                        Core.boardEnd = Instant.now();
                         Core.end();
                     } else {
                         Utils.cleanBoard();

@@ -1,75 +1,146 @@
 right0:
   'spawn':
     world: world
-    x: 250.5
+    x: 262.5
     y: 2
     z: 1823.5
     yaw: 90
     pitch: 0
   '0':
     world: world
-    x: 245
+    x: 263
     y: 5
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '1':
     world: world
-    x: 244
+    x: 262
     y: 5
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '2':
     world: world
-    x: 243
+    x: 261
     y: 5
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '3':
     world: world
-    x: 245
+    x: 263
     y: 4
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '4':
     world: world
-    x: 244
+    x: 262
     y: 4
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '5':
     world: world
-    x: 243
+    x: 261
     y: 4
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '6':
     world: world
-    x: 245
+    x: 263
     y: 3
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '7':
     world: world
-    x: 244
+    x: 262
     y: 3
     z: 1827
     yaw: 0.0
     pitch: 0.0
   '8':
     world: world
-    x: 243
+    x: 261
     y: 3
     z: 1827
     yaw: 0.0
     pitch: 0.0
 right1:
+  'spawn':
+    world: world
+    x: 256.5
+    y: 2
+    z: 1823.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 257
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 256
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 255
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 257
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 256
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 255
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 257
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 256
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 255
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+right2:
   'spawn':
     world: world
     x: 250.5
@@ -138,5 +209,644 @@ right1:
     x: 249
     y: 3
     z: 1827
+    yaw: 0.0
+    pitch: 0.0
+right3:
+  'spawn':
+    world: world
+    x: 244.5
+    y: 2
+    z: 1823.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 245
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 244
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 243
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 245
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 244
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 243
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 245
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 244
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 243
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+right4:
+  'spawn':
+    world: world
+    x: 238.5
+    y: 2
+    z: 1823.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 239
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 238
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 237
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 239
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 238
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 237
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 239
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 238
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 237
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+right5:
+  'spawn':
+    world: world
+    x: 232.5
+    y: 2
+    z: 1823.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 233
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 232
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 231
+    y: 5
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 233
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 232
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 231
+    y: 4
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 233
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 232
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 231
+    y: 3
+    z: 1827
+    yaw: 0.0
+    pitch: 0.0
+left0:
+  'spawn':
+    world: world
+    x: 262.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 261
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 262
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 263
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 261
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 262
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 263
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 261
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 262
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 263
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+left1:
+  'spawn':
+    world: world
+    x: 256.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 255
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 256
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 257
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 255
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 256
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 257
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 255
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 256
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 257
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+left2:
+  'spawn':
+    world: world
+    x: 250.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 249
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 250
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 251
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 249
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 250
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 251
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 249
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 250
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 251
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+left3:
+  'spawn':
+    world: world
+    x: 244.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 243
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 244
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 245
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 243
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 244
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 245
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 243
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 244
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 245
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+left4:
+  'spawn':
+    world: world
+    x: 238.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 237
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 238
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 239
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 237
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 238
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 239
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 237
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 238
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 239
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+left5:
+  'spawn':
+    world: world
+    x: 232.5
+    y: 2
+    z: 1809.5
+    yaw: 90
+    pitch: 0
+  '0':
+    world: world
+    x: 231
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '1':
+    world: world
+    x: 232
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '2':
+    world: world
+    x: 233
+    y: 5
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '3':
+    world: world
+    x: 231
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '4':
+    world: world
+    x: 232
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '5':
+    world: world
+    x: 233
+    y: 4
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '6':
+    world: world
+    x: 231
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '7':
+    world: world
+    x: 232
+    y: 3
+    z: 1805
+    yaw: 0.0
+    pitch: 0.0
+  '8':
+    world: world
+    x: 233
+    y: 3
+    z: 1805
     yaw: 0.0
     pitch: 0.0
