@@ -430,7 +430,7 @@ left0:
     x: 262.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
@@ -501,7 +501,7 @@ left1:
     x: 256.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
@@ -572,7 +572,7 @@ left2:
     x: 250.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
@@ -643,7 +643,7 @@ left3:
     x: 244.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
@@ -714,7 +714,7 @@ left4:
     x: 238.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
@@ -785,7 +785,7 @@ left5:
     x: 232.5
     y: 2
     z: 1809.5
-    yaw: 90
+    yaw: 270
     pitch: 0
   '0':
     world: world
