@@ -20,6 +20,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.time.Duration;
@@ -73,7 +75,7 @@ public class Main  extends JavaPlugin implements Listener {
                 final double y = file.getDouble(place+"."+i+".y");
                 final double z = file.getDouble(place+"."+i+".z");
                 if (i == "spawn") {
-                    spawns.add(new Location(world, x, y, z, file.getDouble(place+"."+i+".yaw")));
+                    spawns.add(new Location(world, x, y, z, file.getDouble(place+"."+i+".yaw"), 0));
                     continue;
                 }
                 PLAYER_BOARDS.get(number).add(new Location(world, x, y, z));

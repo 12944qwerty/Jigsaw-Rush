@@ -6,11 +6,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.*;
 
 public class Core {
 
@@ -31,7 +33,7 @@ public class Core {
         playersPlaying.clear();
         playersPlaying.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.teleport(spawnsc.remove(Util.random(0, spawnsc.size())));
+            player.teleport(spawnsc.remove(Utils.random(0, spawnsc.size())));
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
             playersPlaying.add(player);
