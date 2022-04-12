@@ -47,10 +47,9 @@ public class Core {
             public void run() {
                 gameBegin = Instant.now();
                 Utils.generateBoard();
-                for (Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : playersPlaying) {
                     Utils.giveItems(player);
                 }
-                Main.maxScore = Bukkit.getOnlinePlayers().size();
             }
         }.runTaskLater(Main.getPlugin(Main.class), 60L);
     }

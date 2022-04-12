@@ -1,7 +1,6 @@
 package com.gmail.qwerty12944qwerty.pgjigsaw.main;
 
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandEnd;
-import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandMaxScore;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandStart;
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
 import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
@@ -31,9 +30,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Main  extends JavaPlugin implements Listener {
-
-    public static int maxScore = 1;
-
     public static boolean gameRunning = false;
 
     public static List<Location> spawns = new ArrayList<>();
@@ -98,15 +94,11 @@ public class Main  extends JavaPlugin implements Listener {
                 if (Utils.correctBoard(clickedBlock.getLocation())) {
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
                     event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Core.boardEnd).toMillis() / 1000.0f))+"s");
-                    Core.currentScore++;
                     Core.playersDone.add(event.getPlayer());
-                    if (Core.currentScore >= maxScore && Core.playersDone.equals(Core.playersPlaying) {
+                    if (Core.playersDone.equals(Core.playersPlaying) {
+                        Core.currentScore++;
                         Core.boardEnd = Instant.now();
                         Core.end();
-                    } else {
-                        Utils.cleanBoard();
-                        Utils.generateBoard();
-                        Utils.giveItems(event.getPlayer());
                     }
                 }
             }
@@ -115,16 +107,21 @@ public class Main  extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().teleport(worldSpawn);
+        Player plr = event.getPlayer();
+        plr.teleport(worldSpawn);
+        plr.getInventory().clear();
+        
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
+        if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
     }
 
@@ -163,7 +160,6 @@ public class Main  extends JavaPlugin implements Listener {
         switch (command.getName().toLowerCase()) {
             case "start": new CommandStart().execute(sender); break;
             case "end": new CommandEnd().execute(sender); break;
-            case "maxscore": new CommandMaxScore().execute(sender, args); break;
             default: return (true);
         }
         return (true);
