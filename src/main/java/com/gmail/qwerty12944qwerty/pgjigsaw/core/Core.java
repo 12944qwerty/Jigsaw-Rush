@@ -31,7 +31,7 @@ public class Core {
         Main.gameRunning = true;
         List<Location> spawnsc = new ArrayList<Location>(Main.spawns); // Copy
         playersPlaying.clear();
-        playersPlaying.clear();
+        playersDone.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.teleport(spawnsc.remove(Utils.randInt(0, spawnsc.size())));
             player.setGameMode(GameMode.ADVENTURE);
