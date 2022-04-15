@@ -33,7 +33,7 @@ public class Core {
         playersPlaying.clear();
         playersPlaying.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.teleport(spawnsc.remove(Utils.random(0, spawnsc.size())));
+            player.teleport(spawnsc.remove(Utils.randInt(0, spawnsc.size())));
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
             playersPlaying.add(player);

@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -71,7 +72,7 @@ public class Main  extends JavaPlugin implements Listener {
                 final double y = file.getDouble(place+"."+i+".y");
                 final double z = file.getDouble(place+"."+i+".z");
                 if (i == "spawn") {
-                    spawns.add(new Location(world, x, y, z, file.getDouble(place+"."+i+".yaw"), 0));
+                    spawns.add(new Location(world, x, y, z, (float) file.getDouble(place+"."+i+".yaw"), 0));
                     continue;
                 }
                 PLAYER_BOARDS.get(number).add(new Location(world, x, y, z));
