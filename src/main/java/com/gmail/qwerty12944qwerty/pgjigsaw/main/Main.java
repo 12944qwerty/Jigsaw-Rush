@@ -94,7 +94,9 @@ public class Main  extends JavaPlugin implements Listener {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ORB_PICKUP, 1, 1);
                 if (Utils.correctBoard(clickedBlock.getLocation())) {
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
-                    event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Instant.now()).toMillis() / 1000.0f))+"s");
+                    for (Player plr : Bukkit.getOnlinePlayers()) {
+                        plr.sendMessage("§a" + (plr.equals(event.getPlayer()) ? "You" : plr.getName()) + " completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Instant.now()).toMillis() / 1000.0f))+"s");
+                    }
                     Core.playersDone.add(event.getPlayer());
                     if (Core.playersDone.containsAll(Core.playersPlaying) && Core.playersPlaying.containsAll(Core.playersDone)) {
                         Core.currentScore++;
