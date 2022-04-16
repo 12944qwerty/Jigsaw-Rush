@@ -1,4 +1,4 @@
-package nms;
+package com.gmail.qwerty12944qwerty.pgjigsaw.nms;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

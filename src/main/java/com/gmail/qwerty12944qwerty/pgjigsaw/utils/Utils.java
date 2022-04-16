@@ -2,7 +2,7 @@ package com.gmail.qwerty12944qwerty.pgjigsaw.utils;
 
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
 import com.gmail.qwerty12944qwerty.pgjigsaw.main.Main;
-import nms.NMSTitle;
+import com.gmail.qwerty12944qwerty.pgjigsaw.nms.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
