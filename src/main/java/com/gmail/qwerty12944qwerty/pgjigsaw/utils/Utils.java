@@ -61,12 +61,8 @@ public class Utils {
         int index = 0;
 
         for (ArrayList<Location> i: Main.PLAYER_BOARDS) {
-            for (Location l : i) {
-                if (block.getBlockX() == l.getBlockX() &&
-                        block.getBlockY() == l.getBlockY() &&
-                        block.getBlockZ() == l.getBlockZ()) {
-                    return index;
-                }
+            if (i.contains(block)) {
+                return (index);
             }
             index++;
         }
@@ -76,9 +72,6 @@ public class Utils {
 
     public static int boardIndex(Location block) {
         int index = 0;
-        if (getBoardIndex(block) == -1) {
-            return (-1);
-        }
         for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {
             if (block.getBlockX() == l.getBlockX() &&
                     block.getBlockY() == l.getBlockY() &&
@@ -87,13 +80,12 @@ public class Utils {
             }
             index++;
         }
-
         return (index);
     }
 
     public static boolean correctBoard(Location block) {
         int i = 0;
-        if (getBoardIndex(block) == -1) {
+        if (getBoardIndex(block) < 0) {
             return (false);
         }
         for (Location l : Main.PLAYER_BOARDS.get(getBoardIndex(block))) {

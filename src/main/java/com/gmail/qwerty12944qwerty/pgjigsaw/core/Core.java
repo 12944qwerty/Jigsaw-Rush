@@ -17,7 +17,6 @@ import java.util.*;
 public class Core {
 
     public static Instant boardBegin;
-    public static Instant boardEnd;
     public static Instant gameBegin;
     public static Instant gameEnd;
 

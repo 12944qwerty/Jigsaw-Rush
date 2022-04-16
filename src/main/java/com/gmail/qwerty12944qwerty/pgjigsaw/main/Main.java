@@ -64,19 +64,19 @@ public class Main  extends JavaPlugin implements Listener {
         respawns = file.getKeys(false);
         for (final String place : respawns) {
             Set<String> jigsaw = file.getConfigurationSection(place).getKeys(false);
-            PLAYER_BOARDS.add(new ArrayList<Location>());
+            ArrayList<Location> temp = new ArrayList<>();
             String mystr = place.replaceAll("[^\\d]", "");
-            int number = Integer.parseInt(mystr);
             for (final String i : jigsaw) {
                 final double x = file.getDouble(place+"."+i+".x");
                 final double y = file.getDouble(place+"."+i+".y");
                 final double z = file.getDouble(place+"."+i+".z");
-                if (i == "spawn") {
+                if (i.equals("spawn")) {
                     spawns.add(new Location(world, x, y, z, (float) file.getDouble(place+"."+i+".yaw"), 0));
                     continue;
                 }
-                PLAYER_BOARDS.get(number).add(new Location(world, x, y, z));
+                temp.add(new Location(world, x, y, z));
             }
+            PLAYER_BOARDS.add(temp);
         }
     }
 
@@ -94,11 +94,10 @@ public class Main  extends JavaPlugin implements Listener {
                 event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ORB_PICKUP, 1, 1);
                 if (Utils.correctBoard(clickedBlock.getLocation())) {
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
-                    event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Core.boardEnd).toMillis() / 1000.0f))+"s");
+                    event.getPlayer().sendMessage("§aYou completed this board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.boardBegin, Instant.now()).toMillis() / 1000.0f))+"s");
                     Core.playersDone.add(event.getPlayer());
                     if (Core.playersDone.equals(Core.playersPlaying)) {
                         Core.currentScore++;
-                        Core.boardEnd = Instant.now();
                         Core.end();
                     }
                 }
