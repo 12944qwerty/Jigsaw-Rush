@@ -27,41 +27,47 @@ public class Core {
     public static Material[] order;
 
     public static void start() {
-        Main.gameRunning = true;
-        List<Location> spawnsc = new ArrayList<Location>(Main.spawns); // Copy
-        playersPlaying.clear();
-        playersDone.clear();
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.teleport(spawnsc.remove(Utils.randInt(0, spawnsc.size())));
-            player.setGameMode(GameMode.ADVENTURE);
-            player.getInventory().clear();
-            playersPlaying.add(player);
-        }
-        Main.world.setDifficulty(Difficulty.PEACEFUL);
-        Utils.cleanBoard();
-        Utils.countdown();
+        if (!Main.gameRunning) {
+            Main.gameRunning = true;
+            List<Location> spawnsc = new ArrayList<Location>(Main.spawns); // Copy
+            playersPlaying.clear();
+            playersDone.clear();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.getGameMode() == GameMode.SPECTATOR) continue;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                gameBegin = Instant.now();
-                Utils.generateBoard();
-                for (Player player : playersPlaying) {
-                    Utils.giveItems(player);
-                }
+                player.teleport(spawnsc.remove(Utils.randInt(0, spawnsc.size())));
+                player.setGameMode(GameMode.ADVENTURE);
+                player.getInventory().clear();
+                playersPlaying.add(player);
             }
-        }.runTaskLater(Main.getPlugin(Main.class), 60L);
+            Main.world.setDifficulty(Difficulty.PEACEFUL);
+            Utils.cleanBoard();
+            Utils.countdown();
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    gameBegin = Instant.now();
+                    Utils.generateBoard();
+                    for (Player player : playersPlaying) {
+                        Utils.giveItems(player);
+                    }
+                }
+            }.runTaskLater(Main.getPlugin(Main.class), 60L);
+        }
     }
 
     public static void end() {
-        Main.gameRunning = false;
-        gameEnd = Instant.now();
-        Utils.cleanBoard();
+        if (Main.gameRunning) {
+            Main.gameRunning = false;
+            gameEnd = Instant.now();
+            Utils.cleanBoard();
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage("§aGame completed "+currentScore+" board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.gameBegin, Core.gameEnd).toMillis() / 1000.0f))+"s");
-            p.getInventory().clear();
-            p.teleport(Main.worldSpawn);
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.sendMessage("§aGame completed "+currentScore+" board in: §b"+Utils.ROUND.format(((float) Duration.between(Core.gameBegin, Core.gameEnd).toMillis() / 1000.0f))+"s");
+                p.getInventory().clear();
+                if (p.getGameMode() != GameMode.SPECTATOR) p.teleport(Main.worldSpawn);
+            }
         }
     }
 }

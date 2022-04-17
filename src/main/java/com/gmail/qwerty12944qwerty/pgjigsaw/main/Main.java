@@ -2,7 +2,9 @@ package com.gmail.qwerty12944qwerty.pgjigsaw.main;
 
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandEnd;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandStart;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandAfk;
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
+import com.gmail.qwerty12944qwerty.pgjigsaw.nms.NMSChat;
 import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -18,11 +20,13 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -38,6 +42,8 @@ public class Main  extends JavaPlugin implements Listener {
 
     public static final List<Location> BOARD = new ArrayList<>();
     public static final ArrayList<ArrayList<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
+
+    public static List<Player> AFK = new ArrayList<>();
 
     public static final Material[] MATERIALS = new Material[] {Material.DIRT, Material.STONE, Material.COBBLESTONE, Material.LOG, Material.WOOD, Material.BRICK, Material.GOLD_BLOCK, Material.NETHERRACK, Material.ENDER_STONE};
 
@@ -78,6 +84,15 @@ public class Main  extends JavaPlugin implements Listener {
             }
             PLAYER_BOARDS.add(temp);
         }
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player p : AFK) {
+                    NMSChat.send(p, ChatColor.BLUE + "You are currently AFK", NMSChat.MessageType.ACTION_BAR);
+                }
+            }
+        }.runTaskTimer(this, 0L, 20L);
     }
 
     @EventHandler
@@ -109,20 +124,34 @@ public class Main  extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+        AFK.remove(event.getPlayer());
         Player plr = event.getPlayer();
         plr.teleport(worldSpawn);
-        plr.getInventory().clear();
-        
+        plr.setGameMode(GameMode.ADVENTURE);
+        plr.getInventory().clear(); 
+    }
+
+    @EventHandler
+    public void onGamemodeSwitch(PlayerGameModeChangeEvent event) {
+        if (event.getNewGameMode() != GameMode.SPECTATOR) return;
+        if (Core.playersDone.contains(event.getPlayer())) return;
+        Core.playersPlaying.remove(event.getPlayer());
+
+        if (Core.playersPlaying.size() == 0) {
+            Core.end();
+        }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        AFK.remove(event.getPlayer());
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
+        AFK.remove(event.getPlayer());
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
     }
@@ -162,6 +191,7 @@ public class Main  extends JavaPlugin implements Listener {
         switch (command.getName().toLowerCase()) {
             case "start": new CommandStart().execute(sender); break;
             case "end": new CommandEnd().execute(sender); break;
+            case "afk": new CommandAfk().execute(sender); break;
             default: return (true);
         }
         return (true);
