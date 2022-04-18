@@ -123,6 +123,7 @@ public class Main  extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         checkAFK.replace(event.getPlayer(), Instant.now());
+        if (Core.playersDone.contains(event.getPlayer())) return;
         if (event.getClickedBlock() == null) return;
         if (event.getPlayer().getItemInHand() == null) return;
         if (Core.playersDone.contains(event.getPlayer())) return;
