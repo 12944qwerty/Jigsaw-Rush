@@ -3,6 +3,7 @@ package com.gmail.qwerty12944qwerty.pgjigsaw.main;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandEnd;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandStart;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandAfk;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandAfkTime;
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
 import com.gmail.qwerty12944qwerty.pgjigsaw.nms.NMSChat;
 import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
@@ -24,6 +25,7 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -31,6 +33,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
@@ -44,6 +47,8 @@ public class Main  extends JavaPlugin implements Listener {
     public static final ArrayList<ArrayList<Location>> PLAYER_BOARDS = new ArrayList<ArrayList<Location>>();
 
     public static List<Player> AFK = new ArrayList<>();
+    public static Hashtable<Player, Instant> checkAFK = new Hashtable<>();
+    public static int autoAFKTime;
 
     public static final Material[] MATERIALS = new Material[] {Material.DIRT, Material.STONE, Material.COBBLESTONE, Material.LOG, Material.WOOD, Material.BRICK, Material.GOLD_BLOCK, Material.NETHERRACK, Material.ENDER_STONE};
 
@@ -85,6 +90,9 @@ public class Main  extends JavaPlugin implements Listener {
             PLAYER_BOARDS.add(temp);
         }
 
+        file = YamlConfiguration.loadConfiguration(getClass().getResourceAsStream("/config.yml"));
+        autoAFKTime = file.getInt("autoafktime");
+
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -93,10 +101,28 @@ public class Main  extends JavaPlugin implements Listener {
                 }
             }
         }.runTaskTimer(this, 0L, 20L);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player p : checkAFK.keySet()) {
+                    if (AFK.contains(p)) continue;
+
+                    Instant now = Instant.now();
+                    if (((float) Duration.between(checkAFK.get(p), now).toMillis() / 1000.0f) > autoAFKTime) { // Two Minutes
+                        AFK.add(p);
+                        p.setGameMode(GameMode.SPECTATOR);
+                        p.sendMessage(ChatColor.GRAY + "You are AFK");
+                        NMSChat.send(p, ChatColor.BLUE + "You are currently AFK", NMSChat.MessageType.ACTION_BAR);
+                    }
+                }
+            }
+        }.runTaskTimer(this, 0L, 20L);
     }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        checkAFK.replace(event.getPlayer(), Instant.now());
         if (event.getClickedBlock() == null) return;
         if (event.getPlayer().getItemInHand() == null) return;
         if (Core.playersDone.contains(event.getPlayer())) return;
@@ -129,6 +155,7 @@ public class Main  extends JavaPlugin implements Listener {
         plr.teleport(worldSpawn);
         plr.setGameMode(GameMode.ADVENTURE);
         plr.getInventory().clear(); 
+        checkAFK.put(event.getPlayer(), Instant.now());
     }
 
     @EventHandler
@@ -147,6 +174,7 @@ public class Main  extends JavaPlugin implements Listener {
         AFK.remove(event.getPlayer());
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
+        checkAFK.remove(event.getPlayer());
     }
 
     @EventHandler
@@ -154,6 +182,12 @@ public class Main  extends JavaPlugin implements Listener {
         AFK.remove(event.getPlayer());
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
+        checkAFK.remove(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        checkAFK.replace(event.getPlayer(), Instant.now());
     }
 
     @EventHandler
@@ -192,6 +226,7 @@ public class Main  extends JavaPlugin implements Listener {
             case "start": new CommandStart().execute(sender); break;
             case "end": new CommandEnd().execute(sender); break;
             case "afk": new CommandAfk().execute(sender); break;
+            case "afktime": new CommandAfkTime().execute(sender, args); break;
             default: return (true);
         }
         return (true);
