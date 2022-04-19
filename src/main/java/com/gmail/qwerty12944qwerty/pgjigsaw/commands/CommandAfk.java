@@ -1,5 +1,7 @@
 package com.gmail.qwerty12944qwerty.pgjigsaw.commands;
 
+import java.time.Instant;
+
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
 import com.gmail.qwerty12944qwerty.pgjigsaw.main.Main;
 import com.gmail.qwerty12944qwerty.pgjigsaw.nms.*;
@@ -17,6 +19,7 @@ public class CommandAfk {
             Main.AFK.remove(plr);
             plr.teleport(Main.worldSpawn);
             plr.sendMessage(ChatColor.GRAY + "You are no longer AFK");
+            Main.checkAFK.replace(plr, Instant.now());
             NMSChat.send(plr, "", NMSChat.MessageType.ACTION_BAR);
         } else {
             plr.setGameMode(GameMode.SPECTATOR);
