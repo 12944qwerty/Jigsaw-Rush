@@ -1,6 +1,6 @@
 main: com.gmail.qwerty12944qwerty.pgjigsaw.main.Main
 name: PG-Jigsaw
-version: 1.4.1
+version: 1.4.2
 api-version: 1.13
 author: 12944qwerty
 description: Party Game Jigsaw rush practice
@@ -11,6 +11,9 @@ commands:
   afktime:
     description: Get/Change the time it takes to go afk in seconds
     usage: /afktime [seconds]
+  delay:
+    description: Get/Change the delay before the game generates
+    usage: /delay [seconds]
   start:
     description: Start the game
     usage: /start

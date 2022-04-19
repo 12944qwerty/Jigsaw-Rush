@@ -53,7 +53,7 @@ public class Core {
                         Utils.giveItems(player);
                     }
                 }
-            }.runTaskLater(Main.getPlugin(Main.class), 60L);
+            }.runTaskLater(Main.getPlugin(Main.class), (long) Main.delayStart*20);
         }
     }
 

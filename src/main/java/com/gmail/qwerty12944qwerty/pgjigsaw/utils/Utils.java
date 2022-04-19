@@ -113,26 +113,17 @@ public class Utils {
     }
 
     public static void countdown() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            NMSTitle.send(p.getPlayer(), "§e3", "", 0, 30, 0);
+        for (int i=Main.delayStart;i>0;i--) {
+            final int x = i;
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        NMSTitle.send(p.getPlayer(), "§6" + Integer.toString(x), "", 0, 21, 0);
+                    }
+                }
+            }.runTaskLater(Main.getPlugin(Main.class), (long)((Main.delayStart-i)*20));
         }
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    NMSTitle.send(p.getPlayer(), "§62", "", 0, 30, 0);
-                }
-            }
-        }.runTaskLater(Main.getPlugin(Main.class), 20L);
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    NMSTitle.send(p.getPlayer(), "§c1", "", 0, 20, 0);
-                }
-            }
-        }.runTaskLater(Main.getPlugin(Main.class), 40L);
     }
 
 	public static int randInt(int low, int high){

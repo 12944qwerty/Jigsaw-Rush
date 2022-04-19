@@ -4,6 +4,7 @@ import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandEnd;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandStart;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandAfk;
 import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandAfkTime;
+import com.gmail.qwerty12944qwerty.pgjigsaw.commands.CommandDelay;
 import com.gmail.qwerty12944qwerty.pgjigsaw.core.Core;
 import com.gmail.qwerty12944qwerty.pgjigsaw.nms.NMSChat;
 import com.gmail.qwerty12944qwerty.pgjigsaw.utils.Utils;
@@ -48,7 +49,9 @@ public class Main  extends JavaPlugin implements Listener {
 
     public static List<Player> AFK = new ArrayList<>();
     public static Hashtable<Player, Instant> checkAFK = new Hashtable<>();
+
     public static int autoAFKTime;
+    public static int delayStart;
 
     public static final Material[] MATERIALS = new Material[] {Material.DIRT, Material.STONE, Material.COBBLESTONE, Material.LOG, Material.WOOD, Material.BRICK, Material.GOLD_BLOCK, Material.NETHERRACK, Material.ENDER_STONE};
 
@@ -92,6 +95,7 @@ public class Main  extends JavaPlugin implements Listener {
 
         file = YamlConfiguration.loadConfiguration(getClass().getResourceAsStream("/config.yml"));
         autoAFKTime = file.getInt("autoafktime");
+        delayStart = file.getInt("delaystart");
 
         new BukkitRunnable() {
             @Override
@@ -228,6 +232,7 @@ public class Main  extends JavaPlugin implements Listener {
             case "end": new CommandEnd().execute(sender); break;
             case "afk": new CommandAfk().execute(sender); break;
             case "afktime": new CommandAfkTime().execute(sender, args); break;
+            case "delay": new CommandDelay().execute(sender, args); break;
             default: return (true);
         }
         return (true);
