@@ -169,9 +169,7 @@ public class Main  extends JavaPlugin implements Listener {
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
 
-        if (Core.playersPlaying.size() == 0) {
-            Core.end();
-        }
+        if (Core.playersPlaying.size() == 0 || Core.playersDone.containsAll(Core.playersPlaying)) Core.end();
     }
 
     @EventHandler
@@ -180,6 +178,8 @@ public class Main  extends JavaPlugin implements Listener {
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
         checkAFK.remove(event.getPlayer());
+
+        if (Core.playersDone.containsAll(Core.playersPlaying)) Core.end();
     }
 
     @EventHandler
@@ -188,6 +188,8 @@ public class Main  extends JavaPlugin implements Listener {
         if (Core.playersDone.contains(event.getPlayer())) return;
         Core.playersPlaying.remove(event.getPlayer());
         checkAFK.remove(event.getPlayer());
+
+        if (Core.playersDone.containsAll(Core.playersPlaying)) Core.end();
     }
 
     @EventHandler
